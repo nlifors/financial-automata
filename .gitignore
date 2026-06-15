@@ -1,0 +1,11 @@
+# tooling for screenshots / video recording (not part of the site)
+node_modules/
+package.json
+package-lock.json
+record.js
+
+# generated media artifacts
+video/
+*.mp4
+*.gif
+shot-*.png
