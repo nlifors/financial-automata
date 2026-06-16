@@ -2,10 +2,10 @@
 node_modules/
 package.json
 package-lock.json
-record.js
+record*.js
 
 # generated media artifacts
-video/
+video*/
 *.mp4
 *.gif
 shot-*.png

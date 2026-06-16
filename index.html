@@ -893,76 +893,79 @@
     }
   })();
 
-  /* ---------- HERO: elementary cellular automaton (Rule 110) ----------
-     The literal nod to "Automata" — a Turing-complete CA computing in the
-     background. Faint, scrolling upward, re-seeding to stay alive.        */
+  /* ---------- HERO: stationary "live grid" ----------------------------
+     A calm field of faint cells pinned to the grid intersections. Each
+     breathes in place on a slow sine cycle; rare, gentle pings add a hint
+     of activity. Nothing translates or scrolls — quiet, not busy.        */
   (function () {
-    if (reduce) return;
     var canvas = document.getElementById('ca-canvas');
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
-    var cell = 9, rule = 110;
-    var ruleSet = [];
-    for (var r = 0; r < 8; r++) ruleSet[r] = (rule >> r) & 1;
+    var GRID = 64;                 // align to the CSS background grid
+    var nodes = [], pings = [], dpr;
+    var now0 = (window.performance && performance.now) ? performance.now() : 0;
 
-    var cols, rowsCount, grid, dpr;
     function build() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       var w = canvas.clientWidth, h = canvas.clientHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cols = Math.ceil(w / cell) + 1;
-      rowsCount = Math.ceil(h / cell) + 1;
-      grid = [];
-      var first = new Array(cols);
-      for (var i = 0; i < cols; i++) first[i] = Math.random() < 0.5 ? 1 : 0;
-      grid.push(first);
-      while (grid.length < rowsCount) grid.push(nextRow(grid[grid.length - 1]));
-    }
-    function nextRow(prev) {
-      var next = new Array(cols);
-      for (var i = 0; i < cols; i++) {
-        var l = prev[(i - 1 + cols) % cols];
-        var c = prev[i];
-        var rr = prev[(i + 1) % cols];
-        var idx = (l << 2) | (c << 1) | rr;
-        next[i] = ruleSet[idx];
-      }
-      return next;
-    }
-    function draw() {
-      var w = canvas.clientWidth, h = canvas.clientHeight;
-      ctx.clearRect(0, 0, w, h);
-      for (var y = 0; y < grid.length; y++) {
-        var row = grid[y];
-        for (var x = 0; x < cols; x++) {
-          if (row[x]) {
-            // brighter near the top edge where it emerges
-            var a = 0.05 + 0.10 * (1 - y / grid.length);
-            ctx.fillStyle = 'rgba(200,242,78,' + a.toFixed(3) + ')';
-            ctx.fillRect(x * cell, y * cell, cell - 1, cell - 1);
+      nodes = []; pings = [];
+      var cols = Math.floor(w / GRID), rows = Math.floor(h / GRID);
+      for (var cx = 0; cx <= cols; cx++) {
+        for (var cy = 0; cy <= rows; cy++) {
+          if (Math.random() < 0.30) {                 // sparse field
+            nodes.push({
+              x: cx * GRID, y: cy * GRID,
+              phase: Math.random() * Math.PI * 2,
+              speed: 0.10 + Math.random() * 0.18,      // slow breathing
+              base:  0.045 + Math.random() * 0.085,    // low opacity
+              size:  Math.random() < 0.16 ? 5 : 3
+            });
           }
         }
       }
     }
-    var last = 0, interval = 95;
-    var reseed = 0;
-    function loop(ts) {
-      if (ts - last > interval) {
-        last = ts;
-        grid.push(nextRow(grid[grid.length - 1]));
-        if (grid.length > rowsCount) grid.shift();
-        // occasionally perturb to avoid stagnation
-        reseed++;
-        if (reseed % 140 === 0) {
-          var rowx = grid[grid.length - 1];
-          for (var k = 0; k < cols; k++) if (Math.random() < 0.08) rowx[k] ^= 1;
-        }
-        draw();
+
+    function render(t) {
+      var w = canvas.clientWidth, h = canvas.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        var a = n.base * (0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t * n.speed * 2 + n.phase)));
+        if (a < 0.004) continue;
+        ctx.fillStyle = 'rgba(200,242,78,' + a.toFixed(3) + ')';
+        ctx.fillRect(n.x - n.size / 2, n.y - n.size / 2, n.size, n.size);
       }
+      for (var p = pings.length - 1; p >= 0; p--) {
+        var pg = pings[p], age = t - pg.t0, life = 2.0;
+        if (age > life) { pings.splice(p, 1); continue; }
+        var k = age / life;
+        var alpha = Math.sin(k * Math.PI) * 0.16;       // fade up then down
+        var rad = 9 + k * 16;
+        var g = ctx.createRadialGradient(pg.x, pg.y, 0, pg.x, pg.y, rad);
+        g.addColorStop(0, 'rgba(200,242,78,' + alpha.toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(200,242,78,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(pg.x - rad, pg.y - rad, rad * 2, rad * 2);
+      }
+    }
+
+    if (reduce) { build(); render(0); return; }   // static frame, no loop
+
+    var nextPing = 2.5;
+    function loop(ts) {
+      var t = (ts - now0) / 1000;
+      if (t > nextPing && nodes.length) {
+        var hit = nodes[(Math.random() * nodes.length) | 0];
+        pings.push({ x: hit.x, y: hit.y, t0: t });
+        nextPing = t + 3 + Math.random() * 4;
+      }
+      render(t);
       requestAnimationFrame(loop);
     }
-    build(); draw(); requestAnimationFrame(loop);
+    build(); requestAnimationFrame(loop);
+
     var rt;
     window.addEventListener('resize', function () {
       clearTimeout(rt); rt = setTimeout(build, 200);
