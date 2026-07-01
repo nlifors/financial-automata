@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Financial Automata — Autonomous Trading Systems</title>
-<meta name="description" content="Financial Automata designs, backtests, and deploys autonomous trading systems — turning live market data into executed orders in under five milliseconds." />
+<title>Financial Automata — Autonomous · Undisclosed</title>
+<meta name="description" content="Financial Automata operates self-directed trading systems across global markets — continuously, without instruction, and without disclosure. By invitation only." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,28 +12,30 @@
 
 <style>
   /* ============================================================
-     FINANCIAL AUTOMATA — autonomous trading landing page
-     Aesthetic: refined quant-terminal. Ink + electric-lime signal.
+     FINANCIAL AUTOMATA — autonomous trading, undisclosed
+     Aesthetic: a classified dossier. Near-black ink, the signal
+     kept scarce so it reads like the only light in the dark.
+     The product is opacity; the page withholds on purpose.
      ============================================================ */
 
   :root {
-    --bg:          #070809;
-    --bg-2:        #0a0c10;
-    --surface:     #0f1218;
-    --surface-2:   #141923;
-    --line:        rgba(233, 240, 248, 0.08);
-    --line-strong: rgba(233, 240, 248, 0.16);
+    --bg:          #050607;
+    --bg-2:        #08090c;
+    --surface:     #0d1015;
+    --surface-2:   #12161f;
+    --line:        rgba(233, 240, 248, 0.07);
+    --line-strong: rgba(233, 240, 248, 0.14);
 
-    --ink:    #eef3f8;
-    --muted:  #8d97a6;
-    --faint:  #565f6e;
+    --ink:    #e9eff6;
+    --muted:  #828c9b;
+    --faint:  #4c5564;
 
-    --signal:     #c8f24e;   /* electric lime — "the signal" */
-    --signal-dim: #93b53a;
-    --up:         #57e9a0;   /* long  */
-    --down:       #ff6a6a;   /* short */
+    --signal:     #c8f24e;   /* electric lime — "the signal", used sparingly */
+    --signal-dim: #8aac3e;
+    --up:         #57e9a0;
+    --down:       #ff6a6a;
 
-    --glow: rgba(200, 242, 78, 0.45);
+    --glow: rgba(200, 242, 78, 0.40);
 
     --font-display: 'Bricolage Grotesque', sans-serif;
     --font-body:    'Archivo', sans-serif;
@@ -59,7 +61,8 @@
     position: relative;
   }
 
-  /* fine engineered grid + grain, fixed behind everything */
+  /* fine engineered grid, fixed behind everything — fainter now, so the
+     page reads as something emerging out of darkness */
   body::before {
     content: "";
     position: fixed; inset: 0;
@@ -67,18 +70,21 @@
       linear-gradient(var(--line) 1px, transparent 1px),
       linear-gradient(90deg, var(--line) 1px, transparent 1px);
     background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 100%);
-    opacity: .5;
+    mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 20%, transparent 95%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 20%, transparent 95%);
+    opacity: .35;
     pointer-events: none;
     z-index: 0;
   }
+  /* grain + an enveloping vignette so the edges fall away into black */
   body::after {
     content: "";
     position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: .035;
-    mix-blend-mode: overlay;
+    background:
+      radial-gradient(ellipse 120% 100% at 50% 40%, transparent 55%, rgba(0,0,0,.75) 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-blend-mode: normal, overlay;
+    opacity: .5;
     pointer-events: none;
     z-index: 1;
   }
@@ -113,9 +119,35 @@
     content: "";
     width: 28px; height: 1px;
     background: var(--signal);
+    opacity: .7;
   }
 
   h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.02; letter-spacing: -.02em; }
+
+  /* ---- redaction: the page withholds, visibly ---- */
+  .redact {
+    position: relative; display: inline-block; vertical-align: baseline;
+    color: transparent !important; user-select: none; white-space: nowrap;
+    border-radius: 2px; padding: 0 .18em;
+    background:
+      repeating-linear-gradient(90deg,
+        rgba(233,240,248,.15) 0 7px,
+        rgba(233,240,248,.07) 7px 12px);
+    box-shadow: inset 0 0 0 1px rgba(233,240,248,.05);
+    transition: background .3s ease, box-shadow .3s ease;
+  }
+  .redact::selection { background: transparent; }
+  .redact:hover {
+    box-shadow: inset 0 0 0 1px rgba(200,242,78,.18);
+  }
+  /* a faint, never-resolving flicker — it looks alive but reveals nothing */
+  .redact.live { animation: flicker 5.5s steps(1) infinite; }
+  @keyframes flicker {
+    0%, 92%, 100% { opacity: 1; }
+    93% { opacity: .55; }
+    95% { opacity: .9; }
+    97% { opacity: .4; }
+  }
 
   /* ============================================================
      NAV
@@ -128,7 +160,7 @@
     border-bottom: 1px solid transparent;
   }
   header.nav.scrolled {
-    background: rgba(7, 8, 9, 0.72);
+    background: rgba(5, 6, 7, 0.78);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
   }
@@ -181,27 +213,26 @@
   /* ============================================================
      HERO
      ============================================================ */
-  .hero { position: relative; padding: 168px 0 90px; z-index: 2; }
+  .hero { position: relative; padding: 200px 0 120px; z-index: 2; min-height: 92vh; display: flex; align-items: center; }
   #ca-canvas {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    z-index: -1; opacity: .85;
-    mask-image: radial-gradient(ellipse 80% 80% at 65% 35%, #000 0%, transparent 78%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 65% 35%, #000 0%, transparent 78%);
+    z-index: -1; opacity: .7;
+    mask-image: radial-gradient(ellipse 75% 75% at 50% 45%, #000 0%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 45%, #000 0%, transparent 80%);
   }
   .hero-glow {
-    position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
-    width: 900px; height: 600px; z-index: -1; pointer-events: none;
-    background: radial-gradient(circle, rgba(200,242,78,.10) 0%, transparent 60%);
+    position: absolute; top: 4%; left: 50%; transform: translateX(-50%);
+    width: 760px; height: 520px; z-index: -1; pointer-events: none;
+    background: radial-gradient(circle, rgba(200,242,78,.06) 0%, transparent 62%);
   }
 
-  .hero-grid {
-    display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center;
-  }
+  .hero-copy { max-width: 58ch; }
+  .hero .wrap { width: 100%; }
 
-  .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
   .hero-eyebrow .dot {
     width: 7px; height: 7px; border-radius: 50%; background: var(--signal);
-    box-shadow: 0 0 0 0 var(--glow); animation: pulse 2.4s infinite;
+    box-shadow: 0 0 0 0 var(--glow); animation: pulse 2.8s infinite;
   }
   @keyframes pulse {
     0%   { box-shadow: 0 0 0 0 rgba(200,242,78,.5); }
@@ -210,140 +241,78 @@
   }
 
   .hero h1 {
-    font-size: clamp(42px, 6.6vw, 86px);
+    font-size: clamp(44px, 7vw, 92px);
     font-weight: 800;
-    margin-bottom: 26px;
+    margin-bottom: 30px;
+    max-width: 16ch;
   }
   .hero h1 em {
     font-style: normal; color: var(--signal);
     position: relative; white-space: nowrap;
   }
   .hero h1 em::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: .07em; height: .07em;
-    background: var(--signal); opacity: .35;
+    content: ""; position: absolute; left: 0; right: 0; bottom: .07em; height: .06em;
+    background: var(--signal); opacity: .3;
   }
 
   .hero p.lead {
-    font-size: clamp(16px, 1.5vw, 19px);
-    color: var(--muted); max-width: 50ch; margin-bottom: 38px; line-height: 1.6;
+    font-size: clamp(16px, 1.55vw, 19px);
+    color: var(--muted); max-width: 54ch; margin-bottom: 40px; line-height: 1.65;
   }
 
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 
-  .hero-trust {
-    margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line);
+  .hero-status {
+    margin-top: 48px; padding-top: 26px; border-top: 1px solid var(--line);
     display: flex; gap: 38px; flex-wrap: wrap;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em;
   }
-  .hero-trust .item { }
-  .hero-trust .k { font-family: var(--font-mono); font-size: 12px; color: var(--faint); letter-spacing: .14em; text-transform: uppercase; }
-  .hero-trust .v { font-family: var(--font-display); font-weight: 700; font-size: 17px; margin-top: 2px; }
-
-  /* live signal terminal card */
-  .terminal {
-    background: linear-gradient(180deg, rgba(20,25,35,.9), rgba(12,14,18,.92));
-    border: 1px solid var(--line-strong);
-    border-radius: 8px;
-    box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.04);
-    overflow: hidden;
-    backdrop-filter: blur(6px);
-  }
-  .terminal .bar {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 13px 16px; border-bottom: 1px solid var(--line);
-    background: rgba(255,255,255,.015);
-  }
-  .terminal .bar .title { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 9px; }
-  .terminal .bar .live { width: 6px; height: 6px; border-radius: 50%; background: var(--up); animation: pulse 2.4s infinite; }
-  .terminal .bar .dots { display: flex; gap: 6px; }
-  .terminal .bar .dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); display: block; }
-
-  .sig-head, .sig-row {
-    display: grid; grid-template-columns: 1.1fr 1fr 1.2fr 1fr;
-    gap: 8px; padding: 11px 16px; font-family: var(--font-mono); font-size: 13px;
-    align-items: center;
-  }
-  .sig-head { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); border-bottom: 1px solid var(--line); }
-  .sig-row { border-bottom: 1px solid rgba(255,255,255,.04); transition: background .3s; }
-  .sig-row:hover { background: rgba(255,255,255,.02); }
-  .sig-row .sym { color: var(--ink); font-weight: 700; }
-  .tag { font-weight: 700; }
-  .tag.long  { color: var(--up); }
-  .tag.short { color: var(--down); }
-  .tag.flat  { color: var(--faint); }
-  .sig-row .conf { color: var(--muted); }
-  .sig-row .lat  { color: var(--signal-dim); text-align: right; }
-
-  .terminal .foot {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px; border-top: 1px solid var(--line);
-    background: rgba(255,255,255,.015); font-family: var(--font-mono); font-size: 12px;
-  }
-  .terminal .foot .lbl { color: var(--faint); letter-spacing: .16em; text-transform: uppercase; font-size: 10px; }
-  .terminal .foot .pnl { font-weight: 700; font-size: 16px; color: var(--up); }
+  .hero-status .st { display: flex; align-items: center; gap: 9px; color: var(--faint); text-transform: uppercase; }
+  .hero-status .st b { color: var(--muted); font-weight: 500; }
+  .hero-status .st .led { width: 6px; height: 6px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 8px var(--glow); }
+  .hero-status .st .led.off { background: var(--faint); box-shadow: none; }
 
   /* ============================================================
-     TICKER
+     NON-DISCLOSURE BAND  (replaces the old stats / results)
      ============================================================ */
-  .ticker {
-    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    background: var(--bg-2); overflow: hidden; position: relative; z-index: 2;
-    margin-top: 70px;
+  .nd { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); position: relative; z-index: 2; }
+  .nd-inner { padding: clamp(56px, 8vw, 96px) 0; }
+  .nd .lead-line {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(26px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -.02em;
+    max-width: 22ch;
   }
-  .ticker::before, .ticker::after {
-    content: ""; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
+  .nd .lead-line .em { color: var(--muted); }
+  .nd-rows {
+    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
   }
-  .ticker::before { left: 0;  background: linear-gradient(90deg, var(--bg-2), transparent); }
-  .ticker::after  { right: 0; background: linear-gradient(-90deg, var(--bg-2), transparent); }
-  .ticker-track {
-    display: flex; gap: 0; white-space: nowrap; width: max-content;
-    animation: marquee 48s linear infinite;
-  }
-  .ticker:hover .ticker-track { animation-play-state: paused; }
-  @keyframes marquee { to { transform: translateX(-50%); } }
-  .tk {
-    display: inline-flex; align-items: center; gap: 12px;
-    padding: 15px 26px; border-right: 1px solid var(--line);
-    font-family: var(--font-mono); font-size: 13px;
-  }
-  .tk .s { color: var(--muted); }
-  .tk .p { color: var(--ink); font-weight: 500; }
-  .tk .c.up   { color: var(--up); }
-  .tk .c.down { color: var(--down); }
+  .nd-cell { background: var(--bg); padding: 34px 30px; }
+  .nd-cell .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .nd-cell .bar { margin: 18px 0 14px; }
+  .nd-cell .bar .redact { font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -.02em; }
+  .nd-cell .status { font-family: var(--font-mono); font-size: 12px; color: var(--signal-dim); letter-spacing: .04em; }
 
   /* ============================================================
      SECTION SCAFFOLD
      ============================================================ */
-  section.block { position: relative; z-index: 2; padding: clamp(70px, 9vw, 130px) 0; }
+  section.block { position: relative; z-index: 2; padding: clamp(74px, 9vw, 134px) 0; }
   .block-head { margin-bottom: 60px; max-width: 760px; }
   .block-head h2 { font-size: clamp(30px, 4.4vw, 52px); margin-top: 22px; font-weight: 700; }
   .block-head p { color: var(--muted); margin-top: 18px; font-size: clamp(15px,1.4vw,18px); max-width: 60ch; }
 
-  /* stats band */
-  .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
-  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .stat { padding: 50px var(--gutter); border-right: 1px solid var(--line); }
-  .stat:last-child { border-right: none; }
-  .stat .num {
-    font-family: var(--font-display); font-weight: 800;
-    font-size: clamp(34px, 4vw, 52px); letter-spacing: -.03em; color: var(--ink);
-    display: flex; align-items: baseline; gap: 4px;
-  }
-  .stat .num .suf { color: var(--signal); font-size: .55em; }
-  .stat .lbl { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .08em; margin-top: 12px; }
+  /* premise — manifesto grid (was the feature grid; icons dropped) */
+  .creed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .tenet { background: var(--bg); padding: 40px 34px 44px; position: relative; transition: background .3s ease; min-height: 240px; display: flex; flex-direction: column; }
+  .tenet:hover { background: var(--surface); }
+  .tenet .no { font-family: var(--font-mono); font-size: 12px; color: var(--faint); letter-spacing: .2em; margin-bottom: 26px; }
+  .tenet h3 { font-size: clamp(22px, 2.3vw, 27px); font-weight: 700; margin-bottom: 14px; line-height: 1.08; }
+  .tenet p { color: var(--muted); font-size: 15px; line-height: 1.62; }
+  .tenet::after { content:""; position:absolute; left:0; top:0; width:100%; height:2px; background: var(--signal); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+  .tenet:hover::after { transform: scaleX(1); }
 
-  /* feature grid */
-  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
-  .feat { background: var(--bg); padding: 38px 32px; position: relative; transition: background .3s ease; min-height: 230px; display: flex; flex-direction: column; }
-  .feat:hover { background: var(--surface); }
-  .feat .ic { width: 38px; height: 38px; margin-bottom: 22px; color: var(--signal); }
-  .feat .ic svg { width: 100%; height: 100%; display: block; }
-  .feat h3 { font-size: 21px; font-weight: 700; margin-bottom: 10px; }
-  .feat p { color: var(--muted); font-size: 15px; line-height: 1.6; }
-  .feat .no { position: absolute; top: 26px; right: 28px; font-family: var(--font-mono); font-size: 12px; color: var(--faint); }
-  .feat::after { content:""; position:absolute; left:0; top:0; width:100%; height:2px; background: var(--signal); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
-  .feat:hover::after { transform: scaleX(1); }
-
-  /* pipeline */
+  /* method — the loop */
   .pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 10px; }
   .step { position: relative; padding: 30px 26px 30px 0; }
   .step .n { font-family: var(--font-mono); font-size: 12px; color: var(--signal); letter-spacing: .2em; }
@@ -352,39 +321,33 @@
   .step::before { content:""; position:absolute; top:36px; left:auto; right:18px; width:7px; height:7px; border-radius:50%; background:var(--signal); }
   .step::after  { content:""; position:absolute; top:39px; left:0; right:32px; height:1px; background: var(--line-strong); z-index:-1; }
   .step:last-child::after { display:none; }
+  .step:last-child::before { background: var(--faint); }
   .step .body { padding-top: 26px; border-top: 1px solid var(--line); }
+  .step .body .redact { font-size: 13.5px; }
 
-  /* performance / chart */
-  .perf-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: center; }
-  .chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 28px; position: relative; overflow:hidden; }
-  .chart-card .meta { display:flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
-  .chart-card .meta .big { font-family: var(--font-display); font-weight:800; font-size: 30px; color: var(--up); }
-  .chart-card .meta .lbl { font-family: var(--font-mono); font-size: 11px; color: var(--faint); letter-spacing: .14em; text-transform: uppercase; }
-  .chart-card svg { width: 100%; height: 210px; display: block; }
-  .perf-stats { display:flex; gap: 34px; margin-top: 28px; flex-wrap: wrap; }
-  .perf-stats .ps .v { font-family: var(--font-display); font-weight: 700; font-size: 24px; }
-  .perf-stats .ps .k { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-top: 4px; }
-
+  /* discretion — redacted library */
   .strat-list { margin-top: 30px; border-top: 1px solid var(--line); }
   .strat {
     display: grid; grid-template-columns: 40px 1fr auto; gap: 20px; align-items: center;
-    padding: 22px 4px; border-bottom: 1px solid var(--line);
+    padding: 24px 4px; border-bottom: 1px solid var(--line);
     cursor: default; transition: padding-left .3s ease, background .3s ease;
   }
-  .strat:hover { padding-left: 14px; background: linear-gradient(90deg, rgba(200,242,78,.05), transparent); }
+  .strat:hover { padding-left: 14px; background: linear-gradient(90deg, rgba(200,242,78,.045), transparent); }
   .strat .idx { font-family: var(--font-mono); font-size: 12px; color: var(--signal); }
-  .strat .nm { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px,2.4vw,28px); }
-  .strat .ds { color: var(--muted); font-size: 14px; font-family: var(--font-mono); }
+  .strat .nm { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px,2.4vw,28px); display: flex; align-items: center; gap: 12px; }
+  .strat .nm .redact { font-size: clamp(20px,2.4vw,28px); }
+  .strat .ds { color: var(--muted); font-size: 13px; font-family: var(--font-mono); letter-spacing: .04em; display: flex; align-items: center; gap: 8px; }
+  .strat .ds .redact { font-size: 13px; }
 
   /* CTA */
-  .cta { position: relative; z-index: 2; padding: clamp(80px,10vw,140px) 0; text-align: center; overflow: hidden; }
+  .cta { position: relative; z-index: 2; padding: clamp(86px,11vw,150px) 0; text-align: center; overflow: hidden; }
   .cta::before {
     content:""; position:absolute; inset:0; z-index:-1;
-    background: radial-gradient(ellipse 60% 90% at 50% 50%, rgba(200,242,78,.10), transparent 70%);
+    background: radial-gradient(ellipse 56% 90% at 50% 50%, rgba(200,242,78,.08), transparent 70%);
   }
   .cta h2 { font-size: clamp(34px, 6vw, 76px); font-weight: 800; max-width: 16ch; margin: 0 auto 26px; }
   .cta h2 em { font-style: normal; color: var(--signal); }
-  .cta p { color: var(--muted); max-width: 50ch; margin: 0 auto 40px; font-size: 18px; }
+  .cta p { color: var(--muted); max-width: 52ch; margin: 0 auto 40px; font-size: 18px; }
   .cta-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
 
   /* footer */
@@ -413,27 +376,20 @@
      RESPONSIVE
      ============================================================ */
   @media (max-width: 980px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 44px; }
-    .terminal { max-width: 480px; }
-    .features { grid-template-columns: repeat(2, 1fr); }
+    .hero { min-height: 0; padding-top: 168px; }
+    .creed { grid-template-columns: repeat(2, 1fr); }
+    .nd-rows { grid-template-columns: 1fr; }
     .pipeline { grid-template-columns: repeat(2, 1fr); gap: 26px 32px; }
     .step::after, .step::before { display: none; }
     .step { padding-right: 0; }
-    .perf-grid { grid-template-columns: 1fr; gap: 40px; }
-    .stats-grid { grid-template-columns: repeat(2,1fr); }
-    .stat:nth-child(2) { border-right: none; }
-    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
     .foot-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 640px) {
     .nav-links { display: none; }
     .nav-cta .btn-ghost { display: none; }
-    .features { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: 1fr; }
-    .stat { border-right: none; border-bottom: 1px solid var(--line); }
-    .stat:last-child { border-bottom: none; }
+    .creed { grid-template-columns: 1fr; }
     .foot-grid { grid-template-columns: 1fr; }
-    .hero-trust { gap: 26px; }
+    .hero-status { gap: 22px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -459,14 +415,13 @@
       <span class="name">Financial<span>Automata</span></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#platform">Platform</a>
-      <a href="#process">Process</a>
-      <a href="#performance">Performance</a>
-      <a href="#strategies">Strategies</a>
+      <a href="#premise">Premise</a>
+      <a href="#method">Method</a>
+      <a href="#discretion">Discretion</a>
     </nav>
     <div class="nav-cta">
-      <a href="#" class="btn btn-ghost">Sign in</a>
-      <a href="#contact" class="btn btn-primary">Request access <span class="arr">→</span></a>
+      <a href="#access" class="btn btn-ghost">Enter a key</a>
+      <a href="#access" class="btn btn-primary">Request access <span class="arr">→</span></a>
     </div>
   </div>
 </header>
@@ -477,208 +432,138 @@
   <section class="hero">
     <canvas id="ca-canvas" aria-hidden="true"></canvas>
     <div class="hero-glow" aria-hidden="true"></div>
-    <div class="wrap hero-grid">
+    <div class="wrap">
       <div class="hero-copy">
         <div class="hero-eyebrow reveal">
           <span class="dot"></span>
-          <span class="eyebrow">Autonomous execution · global markets · 24/7</span>
+          <span class="eyebrow">Autonomous capital · always running</span>
         </div>
-        <h1 class="reveal">We let the machines<br><em>do the trading.</em></h1>
-        <p class="lead reveal">Financial Automata designs, backtests, and deploys self-operating trading systems — turning live market data into executed orders in under five milliseconds, around the clock, without a human in the loop.</p>
+        <h1 class="reveal">The machine trades.<br><em>We don't explain it.</em></h1>
+        <p class="lead reveal">Financial Automata operates self-directed trading systems across global markets — continuously, without instruction, without disclosure. What they decide, they decide alone. What they return, we keep to ourselves.</p>
         <div class="hero-actions reveal">
-          <a href="#contact" class="btn btn-primary">Request access <span class="arr">→</span></a>
-          <a href="#platform" class="btn btn-ghost">Explore the platform</a>
+          <a href="#access" class="btn btn-primary">Request access <span class="arr">→</span></a>
+          <a href="#premise" class="btn btn-ghost">Read the premise</a>
         </div>
-        <div class="hero-trust reveal">
-          <div class="item"><div class="k">Median latency</div><div class="v">4.2 ms</div></div>
-          <div class="item"><div class="k">Venues</div><div class="v">37 connected</div></div>
-          <div class="item"><div class="k">Asset classes</div><div class="v">Equities · FX · Crypto</div></div>
-        </div>
-      </div>
-
-      <!-- live signal terminal -->
-      <div class="terminal reveal" aria-hidden="true">
-        <div class="bar">
-          <span class="title"><span class="live"></span> live signals</span>
-          <span class="dots"><i></i><i></i><i></i></span>
-        </div>
-        <div class="sig-head">
-          <span>instr</span><span>signal</span><span>confidence</span><span style="text-align:right">latency</span>
-        </div>
-        <div id="sig-body">
-          <!-- rows injected by JS -->
-        </div>
-        <div class="foot">
-          <span class="lbl">session p&amp;l · paper book</span>
-          <span class="pnl" id="pnl">+$182,440</span>
+        <div class="hero-status reveal">
+          <span class="st"><span class="led"></span> System · <b>Running</b></span>
+          <span class="st"><span class="led off"></span> Disclosure · <b>None</b></span>
+          <span class="st"><span class="led off"></span> Access · <b>By invitation</b></span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== TICKER ===================== -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track" id="ticker"></div>
-  </div>
-
-  <!-- ===================== STATS ===================== -->
-  <section class="stats block" style="padding-top:0;padding-bottom:0">
-    <div class="stats-grid">
-      <div class="stat reveal">
-        <div class="num"><span class="count" data-target="4.2" data-decimals="1"></span><span class="suf">ms</span></div>
-        <div class="lbl">median order execution</div>
-      </div>
-      <div class="stat reveal">
-        <div class="num"><span class="count" data-target="1.4" data-decimals="1"></span><span class="suf">B</span></div>
-        <div class="lbl">orders routed daily</div>
-      </div>
-      <div class="stat reveal">
-        <div class="num"><span class="count" data-target="15" data-decimals="0"></span><span class="suf">yrs</span></div>
-        <div class="lbl">of tick data backtested</div>
-      </div>
-      <div class="stat reveal">
-        <div class="num"><span class="count" data-target="99.99" data-decimals="2"></span><span class="suf">%</span></div>
-        <div class="lbl">infrastructure uptime</div>
+  <!-- ===================== NON-DISCLOSURE ===================== -->
+  <section class="nd" aria-label="Disclosure policy">
+    <div class="wrap nd-inner">
+      <div class="lead-line reveal">We publish no returns, no holdings, <span class="em">no positions.</span></div>
+      <div class="nd-rows">
+        <div class="nd-cell reveal">
+          <div class="k">Returns</div>
+          <div class="bar"><span class="redact live" aria-label="withheld">+██.█%</span></div>
+          <div class="status">▸ withheld</div>
+        </div>
+        <div class="nd-cell reveal">
+          <div class="k">Holdings</div>
+          <div class="bar"><span class="redact live" aria-label="withheld">███ ████</span></div>
+          <div class="status">▸ withheld</div>
+        </div>
+        <div class="nd-cell reveal">
+          <div class="k">Method</div>
+          <div class="bar"><span class="redact live" aria-label="withheld">████████</span></div>
+          <div class="status">▸ withheld</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== PLATFORM ===================== -->
-  <section class="block" id="platform">
+  <!-- ===================== PREMISE ===================== -->
+  <section class="block" id="premise">
     <div class="wrap">
       <div class="block-head reveal">
-        <div class="sec-index">01 — Platform</div>
-        <h2>One system, from signal to settlement.</h2>
-        <p>Everything a quant desk needs to research, validate, and run strategies in production — built on a single low-latency core so what you backtest is exactly what you trade.</p>
+        <div class="sec-index">01 — Premise</div>
+        <h2>Built to act, not to explain.</h2>
+        <p>Six things we will tell you about the systems. They are also, more or less, everything we are willing to say.</p>
       </div>
-      <div class="features">
-        <div class="feat reveal">
+      <div class="creed">
+        <div class="tenet reveal">
           <span class="no">/01</span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h7v7H4zM13 13h7v7h-7zM4 16l4 4M16 4l4 4"/></svg></div>
-          <h3>Strategy Engine</h3>
-          <p>Compose, version, and deploy strategies in a typed DSL. Promote from notebook to production with a single commit.</p>
+          <h3>It decides alone.</h3>
+          <p>No human approves a trade. No human could — the systems act faster than oversight allows, and they were designed that way on purpose.</p>
         </div>
-        <div class="feat reveal">
+        <div class="tenet reveal">
           <span class="no">/02</span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l3 7 4-14 3 7h4"/></svg></div>
-          <h3>Event Backtester</h3>
-          <p>Replay 15 years of nanosecond-stamped tick data with realistic fills, slippage, and fees. Validate before a cent is risked.</p>
+          <h3>It doesn't explain itself.</h3>
+          <p>The models reach conclusions we never ask them to justify. We measure what they do. We do not require to be told why.</p>
         </div>
-        <div class="feat reveal">
+        <div class="tenet reveal">
           <span class="no">/03</span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <h3>Risk Guardrails</h3>
-          <p>Position limits, drawdown circuit-breakers, and kill-switches enforced in-loop — orders never leave the box without clearing them.</p>
+          <h3>It never closes.</h3>
+          <p>No open, no bell, no end of day. Wherever a market is awake, the system is already inside it — and it does not hesitate at the gap.</p>
         </div>
-        <div class="feat reveal">
+        <div class="tenet reveal">
           <span class="no">/04</span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
-          <h3>Low-Latency Routing</h3>
-          <p>Co-located, kernel-bypass order routing to 37 venues with smart order routing and venue-aware queue modeling.</p>
+          <h3>It keeps its counsel.</h3>
+          <p>We disclose no strategies, no exposures, no performance. The opacity is not an oversight. It is, more than anything, the product.</p>
         </div>
-        <div class="feat reveal">
+        <div class="tenet reveal">
           <span class="no">/05</span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6 4 4 7-9"/><path d="M3 21h18"/></svg></div>
-          <h3>Unified Market Data</h3>
-          <p>Normalized feeds across equities, futures, FX, and crypto — one schema, one clock, full L2 depth and corporate actions.</p>
+          <h3>It learns in the dark.</h3>
+          <p>Every fill becomes training. The system that traded this morning is not quite the one that will be trading tonight.</p>
         </div>
-        <div class="feat reveal">
+        <div class="tenet reveal">
           <span class="no">/06</span>
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
-          <h3>Full Observability</h3>
-          <p>Every signal, order, and fill is timestamped and replayable. Reconstruct any decision the system ever made, to the microsecond.</p>
+          <h3>It isn't for everyone.</h3>
+          <p>We take on a small number of partners, by invitation, on our own timeline. Most inquiries we never answer at all.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== PROCESS ===================== -->
-  <section class="block" id="process" style="padding-top:0">
+  <!-- ===================== METHOD ===================== -->
+  <section class="block" id="method" style="padding-top:0">
     <div class="wrap">
       <div class="block-head reveal">
-        <div class="sec-index">02 — Process</div>
+        <div class="sec-index">02 — Method</div>
         <h2>The loop that never stops.</h2>
-        <p>Five stages run continuously across every connected market. No overnight gaps, no manual handoffs, no hesitation at the open.</p>
+        <p>Five stages run continuously across every connected market. We can name them for you. The part in the middle, we cannot.</p>
       </div>
       <div class="pipeline">
-        <div class="step reveal"><div class="body"><div class="n">01</div><h3>Ingest</h3><p>Normalize every tick, book update, and corporate action into one clock.</p></div></div>
-        <div class="step reveal"><div class="body"><div class="n">02</div><h3>Model</h3><p>Score live features against deployed models to surface tradable edge.</p></div></div>
-        <div class="step reveal"><div class="body"><div class="n">03</div><h3>Decide</h3><p>Size positions under live risk limits and portfolio constraints.</p></div></div>
-        <div class="step reveal"><div class="body"><div class="n">04</div><h3>Execute</h3><p>Route child orders to the optimal venue with minimal market impact.</p></div></div>
-        <div class="step reveal"><div class="body"><div class="n">05</div><h3>Reconcile</h3><p>Confirm fills, mark the book, and feed outcomes back into the models.</p></div></div>
+        <div class="step reveal"><div class="body"><div class="n">01</div><h3>Observe</h3><p>Every tick, book update, and signal folded into a single continuous clock.</p></div></div>
+        <div class="step reveal"><div class="body"><div class="n">02</div><h3>Infer</h3><p>What happens here is <span class="redact live">not described to anyone outside the system</span>.</p></div></div>
+        <div class="step reveal"><div class="body"><div class="n">03</div><h3>Decide</h3><p>Positions sized against limits no one outside the loop has ever seen.</p></div></div>
+        <div class="step reveal"><div class="body"><div class="n">04</div><h3>Execute</h3><p>Orders placed — and gone — before a human could finish reading them.</p></div></div>
+        <div class="step reveal"><div class="body"><div class="n">05</div><h3>Forget</h3><p>The reasoning is discarded. Only the outcome is kept, and quietly fed back in.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== PERFORMANCE ===================== -->
-  <section class="block" id="performance" style="padding-top:0">
+  <!-- ===================== DISCRETION ===================== -->
+  <section class="block" id="discretion" style="padding-top:0">
     <div class="wrap">
       <div class="block-head reveal">
-        <div class="sec-index">03 — Performance</div>
-        <h2>Compounding, on autopilot.</h2>
-        <p>A representative composite of live, fully-automated strategy books. Past performance is illustrative and not a promise of future results.</p>
-      </div>
-      <div class="perf-grid">
-        <div class="reveal">
-          <div class="perf-stats" style="margin-top:0; flex-direction:column; gap:26px;">
-            <div class="ps"><div class="v" style="color:var(--up)">+38.7%</div><div class="k">net return · trailing 12 mo</div></div>
-            <div class="ps"><div class="v">2.41</div><div class="k">composite Sharpe ratio</div></div>
-            <div class="ps"><div class="v">−6.2%</div><div class="k">maximum drawdown</div></div>
-            <div class="ps"><div class="v">71.3%</div><div class="k">win rate · per trade</div></div>
-          </div>
-        </div>
-        <div class="chart-card reveal">
-          <div class="meta">
-            <div>
-              <div class="lbl">composite equity curve</div>
-              <div class="big">+38.7%</div>
-            </div>
-            <div style="text-align:right">
-              <div class="lbl">period</div>
-              <div class="mono" style="font-size:13px;color:var(--muted);margin-top:6px">2025 — 2026</div>
-            </div>
-          </div>
-          <svg id="equity" viewBox="0 0 800 210" preserveAspectRatio="none" role="img" aria-label="Upward equity curve">
-            <defs>
-              <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgba(200,242,78,.28)"/>
-                <stop offset="100%" stop-color="rgba(200,242,78,0)"/>
-              </linearGradient>
-            </defs>
-            <path id="equity-area" fill="url(#fill)" stroke="none"></path>
-            <path id="equity-line" fill="none" stroke="var(--signal)" stroke-width="2.2" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== STRATEGIES ===================== -->
-  <section class="block" id="strategies" style="padding-top:0">
-    <div class="wrap">
-      <div class="block-head reveal">
-        <div class="sec-index">04 — Strategies</div>
-        <h2>A library of edge.</h2>
-        <p>Production strategy families you can allocate to, parameterize, or extend — each one continuously monitored and risk-gated.</p>
+        <div class="sec-index">03 — Discretion</div>
+        <h2>A library you can't read.</h2>
+        <p>We run a number of strategy families. We won't tell you how many, what they are, or what they've done. This is the closest you get.</p>
       </div>
       <div class="strat-list">
-        <div class="strat reveal"><span class="idx">01</span><span class="nm">Statistical Arbitrage</span><span class="ds">mean-reverting · market-neutral</span></div>
-        <div class="strat reveal"><span class="idx">02</span><span class="nm">Market Making</span><span class="ds">liquidity provision · spread capture</span></div>
-        <div class="strat reveal"><span class="idx">03</span><span class="nm">Cross-Asset Momentum</span><span class="ds">trend-following · multi-horizon</span></div>
-        <div class="strat reveal"><span class="idx">04</span><span class="nm">Volatility Harvesting</span><span class="ds">options · gamma-aware</span></div>
-        <div class="strat reveal"><span class="idx">05</span><span class="nm">Latency Arbitrage</span><span class="ds">cross-venue · microstructure</span></div>
+        <div class="strat reveal"><span class="idx">01</span><span class="nm"><span class="redact live">Statistical Arbitrage</span></span><span class="ds">market-neutral · <span class="redact">classified</span></span></div>
+        <div class="strat reveal"><span class="idx">02</span><span class="nm"><span class="redact live">███████ ██████</span></span><span class="ds"><span class="redact">classified</span></span></div>
+        <div class="strat reveal"><span class="idx">03</span><span class="nm">Cross-Asset <span class="redact live">████████</span></span><span class="ds">multi-horizon · <span class="redact">classified</span></span></div>
+        <div class="strat reveal"><span class="idx">04</span><span class="nm"><span class="redact live">██████████ ███████</span></span><span class="ds">options · <span class="redact">classified</span></span></div>
+        <div class="strat reveal"><span class="idx">05</span><span class="nm"><span class="redact live">███████ █████████</span></span><span class="ds">microstructure · <span class="redact">classified</span></span></div>
       </div>
     </div>
   </section>
 
   <!-- ===================== CTA ===================== -->
-  <section class="cta" id="contact">
+  <section class="cta" id="access">
     <div class="wrap">
-      <h2 class="reveal">Put your capital <em>on autopilot.</em></h2>
-      <p class="reveal">Request access to the platform. We onboard a limited number of desks and allocators each quarter.</p>
+      <h2 class="reveal">Access is <em>by invitation.</em></h2>
+      <p class="reveal">If you've been given a key, use it. If you haven't, a request will be considered — quietly, and on our own schedule.</p>
       <div class="cta-actions reveal">
         <a href="#" class="btn btn-primary">Request access <span class="arr">→</span></a>
-        <a href="#" class="btn btn-ghost">Book a technical demo</a>
+        <a href="#" class="btn btn-ghost">Enter a key</a>
       </div>
     </div>
   </section>
@@ -700,38 +585,37 @@
           </svg>
           <span class="name">Financial<span>Automata</span></span>
         </a>
-        <p>Autonomous trading systems for desks, funds, and allocators. Built by engineers and quants who would rather automate than hesitate.</p>
+        <p>Autonomous trading systems for a small number of partners. We would rather automate than explain — and rather say nothing than say too much.</p>
       </div>
       <div class="foot-col">
-        <h4>Product</h4>
-        <a href="#platform">Platform</a>
-        <a href="#process">Process</a>
-        <a href="#performance">Performance</a>
-        <a href="#strategies">Strategies</a>
+        <h4>The firm</h4>
+        <a href="#premise">Premise</a>
+        <a href="#method">Method</a>
+        <a href="#discretion">Discretion</a>
+        <a href="#access">Access</a>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
-        <a href="#">About</a>
+        <a href="#">About <span class="mono" style="color:var(--faint)">[redacted]</span></a>
         <a href="#">Research</a>
         <a href="#">Careers</a>
-        <a href="#">Press</a>
+        <a href="#">Contact</a>
       </div>
       <div class="foot-col">
-        <h4>Connect</h4>
-        <a href="#contact">Request access</a>
-        <a href="#">Documentation</a>
+        <h4>Access</h4>
+        <a href="#access">Request access</a>
+        <a href="#access">Enter a key</a>
         <a href="#">Status</a>
-        <a href="#">Contact</a>
       </div>
     </div>
 
     <div class="disclaimer">
-      RISK DISCLOSURE — Trading financial instruments involves substantial risk of loss and is not suitable for every investor. Automated and algorithmic strategies do not eliminate this risk and may amplify it. Performance figures shown are illustrative composites and do not represent the result of any single account; past performance is not indicative of future results. Nothing on this page constitutes investment advice or an offer to buy or sell any security. Financial Automata is a fictional demonstration brand.
+      RISK DISCLOSURE — Trading financial instruments involves substantial risk of loss and is not suitable for every investor. Automated and algorithmic strategies do not eliminate this risk and may amplify it. This page discloses no performance, holdings, or methods, and nothing on it constitutes investment advice or an offer to buy or sell any security. Financial Automata is a fictional demonstration brand.
     </div>
 
     <div class="foot-bottom">
       <span>© 2026 Financial Automata. All rights reserved.</span>
-      <span>Built for autonomous markets · v1.0</span>
+      <span>Operating quietly · v2.0</span>
     </div>
   </div>
 </footer>
@@ -749,7 +633,6 @@
   /* ---------- scroll reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduce) {
-    // stagger items that share a parent
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -763,212 +646,107 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* ---------- count up ---------- */
-  function animateCount(el) {
-    var target = parseFloat(el.getAttribute('data-target'));
-    var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
-    if (reduce) { el.textContent = target.toFixed(dec); return; }
-    var dur = 1400, start = null;
-    function fmt(v){ return v.toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
-    function tick(ts){
-      if (!start) start = ts;
-      var p = Math.min((ts - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(target * eased);
-      if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = fmt(target);
-    }
-    requestAnimationFrame(tick);
-  }
-  var counts = document.querySelectorAll('.count');
-  if ('IntersectionObserver' in window) {
-    var cio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { animateCount(e.target); cio.unobserve(e.target); } });
-    }, { threshold: 0.6 });
-    counts.forEach(function (el) { cio.observe(el); });
-  } else { counts.forEach(animateCount); }
-
-  /* ---------- ticker tape ---------- */
-  var instruments = [
-    ['ES',   '5612.25', 0.42], ['NQ',  '20184.5', 0.71], ['BTC', '71,840', -0.38],
-    ['ETH',  '3,612',   1.12], ['EUR', '1.0842',  -0.09], ['AAPL','228.31', 0.55],
-    ['NVDA', '141.20',  2.31], ['GC',  '2,684.4', -0.22], ['CL',  '71.92',  0.84],
-    ['JPY',  '154.62',  -0.31],['TSLA','254.10',  1.45], ['SPX', '5,738',  0.36]
-  ];
-  var tk = document.getElementById('ticker');
-  if (tk) {
-    var html = '';
-    for (var pass = 0; pass < 2; pass++) {
-      instruments.forEach(function (it) {
-        var cls = it[2] >= 0 ? 'up' : 'down';
-        var sign = it[2] >= 0 ? '+' : '';
-        html += '<span class="tk"><span class="s">' + it[0] + '</span>'
-              + '<span class="p">' + it[1] + '</span>'
-              + '<span class="c ' + cls + '">' + sign + it[2].toFixed(2) + '%</span></span>';
-      });
-    }
-    tk.innerHTML = html;
-  }
-
-  /* ---------- live signal terminal ---------- */
-  var syms = ['ESX','NQ','BTC','EURUSD','GC','NVDA','CL','SPX'];
-  var states = ['LONG','SHORT','FLAT'];
-  var body = document.getElementById('sig-body');
-  var pnlEl = document.getElementById('pnl');
-  var seed = 7;
-  function rnd(){ seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
-  function pick(a){ return a[Math.floor(rnd() * a.length)]; }
-  function makeRows() {
-    var used = {}; var out = [];
-    for (var i = 0; i < 4; i++) {
-      var s; do { s = pick(syms); } while (used[s]); used[s] = 1;
-      var st = pick(states);
-      var conf = (0.5 + rnd() * 0.49);
-      var lat = (3 + rnd() * 3);
-      out.push({ s: s, st: st, conf: conf, lat: lat });
-    }
-    return out;
-  }
-  function renderRows(rows) {
-    if (!body) return;
-    body.innerHTML = rows.map(function (r) {
-      var cls = r.st === 'LONG' ? 'long' : (r.st === 'SHORT' ? 'short' : 'flat');
-      return '<div class="sig-row"><span class="sym">' + r.s + '</span>'
-           + '<span class="tag ' + cls + '">' + r.st + '</span>'
-           + '<span class="conf">' + r.conf.toFixed(2) + '</span>'
-           + '<span class="lat">' + r.lat.toFixed(1) + 'ms</span></div>';
-    }).join('');
-  }
-  renderRows(makeRows());
-  var pnlVal = 182440;
-  if (!reduce && body) {
-    setInterval(function () { renderRows(makeRows()); }, 2200);
-    setInterval(function () {
-      pnlVal += Math.floor((rnd() - 0.42) * 4200);
-      var neg = pnlVal < 0;
-      pnlEl.textContent = (neg ? '-$' : '+$') + Math.abs(pnlVal).toLocaleString('en-US');
-      pnlEl.style.color = neg ? 'var(--down)' : 'var(--up)';
-    }, 2600);
-  }
-
-  /* ---------- equity curve (deterministic, organic) ---------- */
-  (function () {
-    var line = document.getElementById('equity-line');
-    var area = document.getElementById('equity-area');
-    if (!line) return;
-    var W = 800, H = 210, N = 90, pad = 8;
-    var pts = [];
-    for (var i = 0; i < N; i++) {
-      var t = i / (N - 1);
-      // upward trend + multi-frequency wiggle + a deliberate drawdown dip
-      var trend = t * 0.82;
-      var wig = 0.06 * Math.sin(t * 22) + 0.04 * Math.sin(t * 7 + 1.3) + 0.025 * Math.sin(t * 41);
-      var dip = -0.10 * Math.exp(-Math.pow((t - 0.62) / 0.05, 2));
-      var v = trend + wig + dip;
-      var x = pad + t * (W - pad * 2);
-      var y = (H - pad) - v * (H - pad * 2);
-      pts.push([x, y]);
-    }
-    var d = 'M' + pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' L');
-    line.setAttribute('d', d);
-    area.setAttribute('d', d + ' L' + (W - pad) + ',' + (H - pad) + ' L' + pad + ',' + (H - pad) + ' Z');
-
-    if (!reduce) {
-      var len = line.getTotalLength();
-      line.style.strokeDasharray = len;
-      line.style.strokeDashoffset = len;
-      var drawn = false;
-      var pio = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting && !drawn) {
-            drawn = true;
-            line.style.transition = 'stroke-dashoffset 2.2s cubic-bezier(.4,.1,.2,1)';
-            area.style.transition = 'opacity 1.6s ease 0.6s';
-            area.style.opacity = 0;
-            requestAnimationFrame(function () { line.style.strokeDashoffset = 0; area.style.opacity = 1; });
-          }
-        });
-      }, { threshold: 0.4 });
-      pio.observe(line);
-    }
-  })();
-
-  /* ---------- HERO: stationary "live grid" ----------------------------
-     A calm field of faint cells pinned to the grid intersections. Each
-     breathes in place on a slow sine cycle; rare, gentle pings add a hint
-     of activity. Nothing translates or scrolls — quiet, not busy.        */
+  /* ---------- HERO: a quiet, evolving cellular automaton ---------------
+     Rule 110 — the firm is "Automata", and this is the only thing on the
+     page you're allowed to watch think. Rendered very dim, with a single
+     faint leading edge in the signal color: a frontier of computation
+     advancing in the dark, leaving ghostly trails behind it. Calm, never
+     scrolling the viewport; it recomputes in place.                      */
   (function () {
     var canvas = document.getElementById('ca-canvas');
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
-    var GRID = 64;                 // align to the CSS background grid
-    var nodes = [], pings = [], dpr;
-    var now0 = (window.performance && performance.now) ? performance.now() : 0;
+    var CELL = 9;                  // px per automaton cell
+    var cols, rows, grid, head, dpr, w, h;
+
+    /* deterministic PRNG so the field looks the same character every load */
+    var seed = 110;
+    function rnd(){ seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
 
     function build() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var w = canvas.clientWidth, h = canvas.clientHeight;
+      w = canvas.clientWidth; h = canvas.clientHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      nodes = []; pings = [];
-      var cols = Math.floor(w / GRID), rows = Math.floor(h / GRID);
-      for (var cx = 0; cx <= cols; cx++) {
-        for (var cy = 0; cy <= rows; cy++) {
-          if (Math.random() < 0.30) {                 // sparse field
-            nodes.push({
-              x: cx * GRID, y: cy * GRID,
-              phase: Math.random() * Math.PI * 2,
-              speed: 0.10 + Math.random() * 0.18,      // slow breathing
-              base:  0.045 + Math.random() * 0.085,    // low opacity
-              size:  Math.random() < 0.16 ? 5 : 3
-            });
+      cols = Math.ceil(w / CELL) + 1;
+      rows = Math.ceil(h / CELL) + 1;
+      grid = [];
+      // first generation: sparse random seed
+      var first = new Uint8Array(cols);
+      for (var x = 0; x < cols; x++) first[x] = rnd() < 0.12 ? 1 : 0;
+      first[(cols / 2) | 0] = 1;                   // guarantee a living seed
+      grid.push(first);
+      head = 0;
+    }
+
+    function nextGen(prev) {
+      var out = new Uint8Array(cols);
+      for (var x = 0; x < cols; x++) {
+        var l = prev[(x - 1 + cols) % cols];
+        var c = prev[x];
+        var r = prev[(x + 1) % cols];
+        // Rule 110
+        var p = (l << 2) | (c << 1) | r;
+        out[x] = (110 >> p) & 1;
+      }
+      return out;
+    }
+
+    function paint() {
+      ctx.clearRect(0, 0, w, h);
+      for (var row = 0; row < grid.length; row++) {
+        var gen = grid[row];
+        var y = row * CELL;
+        var isHead = (row === grid.length - 1);
+        for (var x = 0; x < cols; x++) {
+          if (!gen[x]) continue;
+          if (isHead) {
+            ctx.fillStyle = 'rgba(200,242,78,0.30)';   // the live frontier
+          } else {
+            // dim ink trails that fade with depth from the frontier
+            var depth = (grid.length - row) / grid.length;
+            var a = 0.05 + depth * 0.05;
+            ctx.fillStyle = 'rgba(233,240,248,' + a.toFixed(3) + ')';
           }
+          ctx.fillRect(x * CELL, y, CELL - 1, CELL - 1);
         }
       }
     }
 
-    function render(t) {
-      var w = canvas.clientWidth, h = canvas.clientHeight;
-      ctx.clearRect(0, 0, w, h);
-      for (var i = 0; i < nodes.length; i++) {
-        var n = nodes[i];
-        var a = n.base * (0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t * n.speed * 2 + n.phase)));
-        if (a < 0.004) continue;
-        ctx.fillStyle = 'rgba(200,242,78,' + a.toFixed(3) + ')';
-        ctx.fillRect(n.x - n.size / 2, n.y - n.size / 2, n.size, n.size);
-      }
-      for (var p = pings.length - 1; p >= 0; p--) {
-        var pg = pings[p], age = t - pg.t0, life = 2.0;
-        if (age > life) { pings.splice(p, 1); continue; }
-        var k = age / life;
-        var alpha = Math.sin(k * Math.PI) * 0.16;       // fade up then down
-        var rad = 9 + k * 16;
-        var g = ctx.createRadialGradient(pg.x, pg.y, 0, pg.x, pg.y, rad);
-        g.addColorStop(0, 'rgba(200,242,78,' + alpha.toFixed(3) + ')');
-        g.addColorStop(1, 'rgba(200,242,78,0)');
-        ctx.fillStyle = g;
-        ctx.fillRect(pg.x - rad, pg.y - rad, rad * 2, rad * 2);
-      }
+    function advance() {
+      grid.push(nextGen(grid[grid.length - 1]));
+      if (grid.length > rows) grid.shift();          // recompute in place
+      paint();
     }
 
-    if (reduce) { build(); render(0); return; }   // static frame, no loop
+    if (reduce) {                                    // static: a few settled rows
+      build();
+      for (var i = 0; i < rows; i++) grid.push(nextGen(grid[grid.length - 1]));
+      if (grid.length > rows) grid = grid.slice(-rows);
+      paint();
+      return;
+    }
 
-    var nextPing = 2.5;
+    var acc = 0, last = null, STEP = 1 / 7;           // ~7 generations / second
     function loop(ts) {
-      var t = (ts - now0) / 1000;
-      if (t > nextPing && nodes.length) {
-        var hit = nodes[(Math.random() * nodes.length) | 0];
-        pings.push({ x: hit.x, y: hit.y, t0: t });
-        nextPing = t + 3 + Math.random() * 4;
-      }
-      render(t);
+      if (last === null) last = ts;
+      acc += (ts - last) / 1000; last = ts;
+      while (acc >= STEP) { advance(); acc -= STEP; }
       requestAnimationFrame(loop);
     }
-    build(); requestAnimationFrame(loop);
+    build();
+    // pre-fill so the field starts populated, not empty
+    for (var k = 0; k < rows; k++) grid.push(nextGen(grid[grid.length - 1]));
+    if (grid.length > rows) grid = grid.slice(-rows);
+    requestAnimationFrame(loop);
 
     var rt;
     window.addEventListener('resize', function () {
-      clearTimeout(rt); rt = setTimeout(build, 200);
+      clearTimeout(rt); rt = setTimeout(function () {
+        build();
+        for (var k = 0; k < rows; k++) grid.push(nextGen(grid[grid.length - 1]));
+        if (grid.length > rows) grid = grid.slice(-rows);
+      }, 200);
     });
   })();
 
