@@ -4,9 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-`financial-automata` — a marketing landing page for a (fictional) firm building autonomous
-trading systems. The entire site is a single self-contained file: **`index.html`** with
-inline CSS and vanilla JS. No build step, no framework, no runtime dependencies.
+`financial-automata` — the marketing landing page for **Financial Automata**, the real
+personal-finance app that lives at `~/dev/financial_planner` (FastAPI + React + PostgreSQL).
+The app ingests bank/broker statement exports (CSV/Excel) and organizes them into net worth,
+cash flow, spending, holdings, and budget projections. This site is a single self-contained
+file: **`index.html`** with inline CSS and vanilla JS. No build step, no framework, no runtime
+dependencies.
 
 Deployed to GitHub Pages from `main` (root): https://nlifors.github.io/financial-automata/
 
@@ -21,31 +24,38 @@ There is no test/lint/build pipeline — editing `index.html` and reloading is t
 ## Architecture notes
 
 Everything lives in `index.html`, organized top-to-bottom as: `:root` CSS variables →
-component styles → responsive `@media` blocks → markup sections (nav, hero, non-disclosure,
-premise, method, discretion, CTA, footer) → one IIFE `<script>`.
+component styles → responsive `@media` blocks → markup sections (nav, hero, spec band,
+how-it-works, features, privacy, get-started, CTA, footer) → one IIFE `<script>`.
 
-The brand voice is **withholding/mysterious**: the firm discloses no results — no returns,
-holdings, methods, or strategy names. There is deliberately no ticker, stats band, live
-P&L, or equity curve. "Results" are present only as their absence (redaction bars). Keep it
-that way unless the user explicitly asks to reveal numbers again.
+The voice is **concrete and confident**: the page demonstrates the product (a mock dashboard,
+an import toast, a keyword-rule chip) instead of making vague claims. Claims discipline —
+only state things the app actually does (auto-detection of 3 statement types, content-hash
+dedup, 19 editable keyword categories, net-worth snapshots, 3–12-month projections,
+per-user isolation, self-hosting). No invented integrations, pricing, or testimonials.
+The demo numbers in the hero card are illustrative and labeled as such in the footer.
 
 Conventions worth preserving when editing:
-- **Design tokens** are CSS custom properties on `:root` (`--signal` is the lime accent,
-  `--up`/`--down` are semantic colors). Lime is used *scarcely* — it should read like the
-  only light in the dark. Change the theme there, not inline.
-- **Three fonts, by role:** `--font-display` (Bricolage Grotesque) for headings,
-  `--font-body` (Archivo) for prose, `--font-mono` (JetBrains Mono) for all data/labels.
-- **Redaction is a first-class UI element.** `.redact` renders a censored bar in place of
-  withheld text (add `.live` for a faint never-resolving flicker). Use it for any number,
-  name, or method the firm "won't say" — it carries the whole concept.
+- **Design tokens mirror the app** (`financial_planner/frontend/src/styles.css`): navy
+  `--bg #0b1020`, `--surface #16203a`, brand blue `--brand #4f8cff`, violet `--violet
+  #7c5cff`. **Cyan `--cyan #22d3ee` is "the goal color"** — reserved for the wordmark
+  accent, the goal node, eyebrows, and confirmations. Keep it scarce. Change the theme
+  in `:root`, not inline.
+- **Chart colors are validated.** The donut/categorical steps (`--cat-1..4`: `#4f8cff`,
+  `#7c5cff`, `#0891b2`, `#059669`) pass CVD/contrast checks against the dark surface —
+  don't swap them for the lighter semantic tints without re-validating.
+- **The logo is the app's logo** — directed-graph badge (blue→violet, cyan goal node),
+  copied from `financial_planner/frontend/src/components/Logo.tsx` / `public/favicon.svg`.
+  Keep them in sync. The wordmark is lowercase `financial` + cyan `automata`.
+- **Three fonts, by role:** `--font-display` (Familjen Grotesk) for headings and the
+  wordmark, `--font-body` (Schibsted Grotesk) for prose/buttons, `--font-mono`
+  (Spline Sans Mono) for data, labels, and terminal copy. Tabular figures via `.num`.
 - **JS is feature-detected and motion-aware.** Every animation checks
   `prefers-reduced-motion` and bails to a static end-state. Scroll reveals use
   `IntersectionObserver`.
-- **The hero canvas** renders an evolving elementary cellular automaton (Rule 110) — it's
-  decorative and brand-thematic (the firm is "Automata"), the one thing on the page you're
-  "allowed to watch think." Seeded by a deterministic PRNG (no `Math.random` for the seed),
-  rendered dim with a single signal-colored leading edge. Keep it `aria-hidden` and
-  low-opacity so it never competes with the copy.
+- **The hero canvas** renders the automaton at work: a directed graph where particles
+  (transactions) flow from statement nodes through parse/categorize nodes into a single
+  cyan goal node — echoing the logo. Seeded by a deterministic PRNG (no `Math.random`
+  for layout), kept `aria-hidden` and masked so it never competes with the copy.
 
 ## Tooling (git-ignored, not part of the site)
 
